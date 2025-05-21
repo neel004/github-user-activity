@@ -2,6 +2,8 @@ package commands
 
 import (
 	"fmt"
+	"time"
+
 	api "github.com/neel004/github-user-activity/github_api"
 	"github.com/spf13/cobra"
 )
@@ -22,5 +24,9 @@ func FetchUserActivity(cmd *cobra.Command, args []string) error {
 	if len(args) == 0{
 		return fmt.Errorf("expected user name.")
 	}
-	return api.GetUserActivity(args[0])
+	client, err := api.NewClient(5 * time.Second)
+	if err != nil {
+		return err
+	}
+	return UserActivity(args[0], client)
 }
