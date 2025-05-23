@@ -10,10 +10,10 @@ import (
 
 func NewRootCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use: "github-user-activity {user}",
-		Example: "github-user-activity neel004",
-		Short: "Github user activity is a cli tool used to grab the user's github activity.",
-		RunE: FetchUserActivity,
+		Use:                   "github-user-activity {user}",
+		Example:               "github-user-activity neel004",
+		Short:                 "Github user activity is a cli tool used to grab the user's github activity.",
+		RunE:                  FetchUserActivity,
 		DisableFlagsInUseLine: true,
 	}
 
@@ -21,7 +21,7 @@ func NewRootCommand() *cobra.Command {
 }
 
 func FetchUserActivity(cmd *cobra.Command, args []string) error {
-	if len(args) == 0{
+	if len(args) == 0 {
 		return fmt.Errorf("expected user name.")
 	}
 	client, err := api.NewClient(5 * time.Second)
